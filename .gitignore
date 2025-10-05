@@ -68,10 +68,10 @@ Thumbs.db
 # Assets (generated)
 sites/assets/
 
-# Custom apps that should be tracked (only whatsapp_orders)
-# apps/erpnext/
-# apps/frappe/
-# apps/hrms/
+# Standard Frappe/ERPNext apps (exclude from version control)
+apps/erpnext/
+apps/frappe/
+apps/hrms/
 
 # Keep only our custom WhatsApp integration
 !apps/whatsapp_orders/
