@@ -1,0 +1,95 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2024-01-01 00:00:00.000000",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "customer",
+  "preference_type",
+  "preferred_sku",
+  "preferred_fulfiller",
+  "preference_score",
+  "usage_count",
+  "last_used"
+ ],
+ "fields": [
+  {
+   "fieldname": "customer",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Customer",
+   "options": "Customer",
+   "reqd": 1
+  },
+  {
+   "fieldname": "preference_type",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Preference Type",
+   "options": "\nPreferred SKU\nPreferred Fulfiller",
+   "reqd": 1
+  },
+  {
+   "fieldname": "preferred_sku",
+   "fieldtype": "Link",
+   "label": "Preferred SKU",
+   "options": "Item",
+   "depends_on": "eval:doc.preference_type == 'Preferred SKU'"
+  },
+  {
+   "fieldname": "preferred_fulfiller",
+   "fieldtype": "Link",
+   "label": "Preferred Fulfiller (Shop)",
+   "options": "Delivery Shop",
+   "depends_on": "eval:doc.preference_type == 'Preferred Fulfiller'"
+  },
+  {
+   "default": "0",
+   "fieldname": "preference_score",
+   "fieldtype": "Float",
+   "label": "Preference Score",
+   "description": "Higher score = stronger preference (0-100)"
+  },
+  {
+   "default": "0",
+   "fieldname": "usage_count",
+   "fieldtype": "Int",
+   "label": "Usage Count",
+   "description": "Number of times this preference was used",
+   "read_only": 1
+  },
+  {
+   "fieldname": "last_used",
+   "fieldtype": "Datetime",
+   "label": "Last Used",
+   "read_only": 1
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2024-01-01 00:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Whatsapp Orders",
+ "name": "Customer Preference",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1
+}
