@@ -4,6 +4,8 @@ Utilities for Order Routing System
 
 import math
 from typing import Tuple, List, Dict, Optional
+import frappe
+import requests
 
 
 def calculate_distance(lat1: float, lon1: float, lat2: float, lon2: float) -> float:
@@ -93,3 +95,47 @@ def format_distance(meters: float) -> str:
     else:
         km = meters / 1000
         return f"{km:.1f} km"
+
+
+@frappe.whitelist()
+def geocode_address(address: str):
+    """
+    Convert address string to GPS coordinates using OpenStreetMap Nominatim API
+    
+    Args:
+        address: Address string (e.g., "123 Main St, Nairobi, Kenya")
+    
+    Returns:
+        Dict with 'latitude' and 'longitude' keys, or None if geocoding fails
+    """
+    try:
+        # Use OpenStreetMap Nominatim (free, no API key required)
+        url = "https://nominatim.openstreetmap.org/search"
+        params = {
+            'q': address,
+            'format': 'json',
+            'limit': 1
+        }
+        
+        # Add user agent as required by Nominatim
+        headers = {
+            'User-Agent': 'WhatsApp-Order-System/1.0'
+        }
+        
+        response = requests.get(url, params=params, headers=headers, timeout=10)
+        
+        if response.status_code == 200:
+            data = response.json()
+            if data and len(data) > 0:
+                result = data[0]
+                return {
+                    'latitude': float(result['lat']),
+                    'longitude': float(result['lon'])
+                }
+        
+        frappe.log_error(f"Geocoding failed for address: {address}", "Geocoding Error")
+        return None
+    
+    except Exception as e:
+        frappe.log_error(f"Error geocoding address '{address}': {str(e)}", "Geocoding Error")
+        return None
