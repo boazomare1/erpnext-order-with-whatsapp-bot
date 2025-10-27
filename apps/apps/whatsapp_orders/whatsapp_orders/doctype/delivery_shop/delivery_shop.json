@@ -1,0 +1,152 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2024-01-01 00:00:00.000000",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "shop_name",
+  "shop_code",
+  "location_section",
+  "gps_latitude",
+  "gps_longitude",
+  "county",
+  "constituency",
+  "ward",
+  "nearest_landmark",
+  "details_section",
+  "erpnext_warehouse",
+  "operating_hours",
+  "contact_person",
+  "phone_number",
+  "email",
+  "status",
+  "active"
+ ],
+ "fields": [
+  {
+   "fieldname": "shop_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Shop Name",
+   "reqd": 1
+  },
+  {
+   "fieldname": "shop_code",
+   "fieldtype": "Data",
+   "label": "Shop Code",
+   "unique": 1
+  },
+  {
+   "fieldname": "location_section",
+   "fieldtype": "Section Break",
+   "label": "Location Details"
+  },
+  {
+   "fieldname": "gps_latitude",
+   "fieldtype": "Float",
+   "label": "GPS Latitude",
+   "reqd": 1
+  },
+  {
+   "fieldname": "gps_longitude",
+   "fieldtype": "Float",
+   "label": "GPS Longitude",
+   "reqd": 1
+  },
+  {
+   "fieldname": "county",
+   "fieldtype": "Data",
+   "label": "County"
+  },
+  {
+   "fieldname": "constituency",
+   "fieldtype": "Data",
+   "label": "Constituency"
+  },
+  {
+   "fieldname": "ward",
+   "fieldtype": "Data",
+   "label": "Ward"
+  },
+  {
+   "fieldname": "nearest_landmark",
+   "fieldtype": "Data",
+   "label": "Nearest Landmark",
+   "description": "A recognizable landmark near the shop for delivery reference"
+  },
+  {
+   "fieldname": "details_section",
+   "fieldtype": "Section Break",
+   "label": "Shop Details"
+  },
+  {
+   "fieldname": "erpnext_warehouse",
+   "fieldtype": "Link",
+   "label": "ERPNext Warehouse",
+   "options": "Warehouse",
+   "description": "Link to ERPNext warehouse for inventory tracking"
+  },
+  {
+   "fieldname": "operating_hours",
+   "fieldtype": "Data",
+   "label": "Operating Hours",
+   "description": "e.g., Mon-Fri 8:00 AM - 6:00 PM"
+  },
+  {
+   "fieldname": "contact_person",
+   "fieldtype": "Data",
+   "label": "Contact Person"
+  },
+  {
+   "fieldname": "phone_number",
+   "fieldtype": "Phone",
+   "label": "Phone Number"
+  },
+  {
+   "fieldname": "email",
+   "fieldtype": "Data",
+   "label": "Email"
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "Status",
+   "options": "\nActive\nInactive\nUnder Maintenance"
+  },
+  {
+   "default": "1",
+   "fieldname": "active",
+   "fieldtype": "Check",
+   "label": "Active",
+   "description": "Is this shop currently active for order routing?"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2024-01-01 00:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Whatsapp Orders",
+ "name": "Delivery Shop",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "title_field": "shop_name",
+ "track_changes": 1
+}
