@@ -245,3 +245,14 @@ auto_setup() {
 
 # Run the automated setup
 auto_setup
+
+
+
+
+
+
+
+
+
+
+

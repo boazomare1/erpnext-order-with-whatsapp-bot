@@ -1,0 +1,462 @@
+{
+	"info": {
+		"_postman_id": "whatsapp-order-api-collection",
+		"name": "WhatsApp Order Management API",
+		"description": "Complete API collection for managing WhatsApp orders in ERPNext",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Authentication",
+			"item": [
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "usr",
+									"value": "Administrator",
+									"type": "text"
+								},
+								{
+									"key": "pwd",
+									"value": "admin",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{base_url}}/api/method/login",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"method",
+								"login"
+							]
+						},
+						"description": "Login to ERPNext to get session cookie"
+					}
+				}
+			]
+		},
+		{
+			"name": "Order Management",
+			"item": [
+				{
+					"name": "Create Order",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"customer_name\": \"John Doe\",\n  \"customer_phone\": \"254770534365\",\n  \"delivery_address\": \"123 Test Street, Nairobi\",\n  \"payment_method\": \"Cash on Delivery\",\n  \"items\": [\n    {\n      \"item_name\": \"LPG Cylinder 6kg\",\n      \"description\": \"6kg LPG Cylinder\",\n      \"quantity\": 2,\n      \"unit_price\": 1200\n    },\n    {\n      \"item_name\": \"LPG Regulator\",\n      \"description\": \"LPG Pressure Regulator\",\n      \"quantity\": 1,\n      \"unit_price\": 500\n    }\n  ]\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/method/frappe.custom.doctype.whatsapp_order.api.create_order",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"method",
+								"frappe.custom.doctype.whatsapp_order.api.create_order"
+							]
+						},
+						"description": "Create a new WhatsApp order with items"
+					}
+				},
+				{
+					"name": "Get Order",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"order_id\": \"WOR-2025-00021\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/method/frappe.custom.doctype.whatsapp_order.api.get_order",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"method",
+								"frappe.custom.doctype.whatsapp_order.api.get_order"
+							]
+						},
+						"description": "Get order details by ID"
+					}
+				},
+				{
+					"name": "List Orders",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"status\": \"New\",\n  \"customer_phone\": \"254770534365\",\n  \"limit\": 10,\n  \"offset\": 0\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/method/frappe.custom.doctype.whatsapp_order.api.list_orders",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"method",
+								"frappe.custom.doctype.whatsapp_order.api.list_orders"
+							]
+						},
+						"description": "List orders with optional filtering"
+					}
+				},
+				{
+					"name": "Update Order Status",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"order_id\": \"WOR-2025-00021\",\n  \"status\": \"Confirmed\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/method/frappe.custom.doctype.whatsapp_order.api.update_order_status",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"method",
+								"frappe.custom.doctype.whatsapp_order.api.update_order_status"
+							]
+						},
+						"description": "Update order status (New, Confirmed, Processing, Shipped, Delivered, Cancelled)"
+					}
+				},
+				{
+					"name": "Cancel Order",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"order_id\": \"WOR-2025-00021\",\n  \"reason\": \"Customer requested cancellation\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/method/frappe.custom.doctype.whatsapp_order.api.cancel_order",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"method",
+								"frappe.custom.doctype.whatsapp_order.api.cancel_order"
+							]
+						},
+						"description": "Cancel an order with reason"
+					}
+				},
+				{
+					"name": "Duplicate Order",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"order_id\": \"WOR-2025-00021\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/method/frappe.custom.doctype.whatsapp_order.api.duplicate_order",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"method",
+								"frappe.custom.doctype.whatsapp_order.api.duplicate_order"
+							]
+						},
+						"description": "Duplicate an existing order (reorder)"
+					}
+				},
+				{
+					"name": "Search Orders (Wildcard)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"query\": \"*Street*\",\n  \"limit\": 10\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/method/frappe.custom.doctype.whatsapp_order.api.search_orders",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"method",
+								"frappe.custom.doctype.whatsapp_order.api.search_orders"
+							]
+						},
+						"description": "Search orders by customer name, phone, order ID, or delivery address (supports wildcards like *Street*, Nairobi*)"
+					}
+				},
+				{
+					"name": "Get Orders by Phone",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"phone_number\": \"254770534365\",\n  \"limit\": 10,\n  \"offset\": 0\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/method/frappe.custom.doctype.whatsapp_order.api.get_orders_by_phone",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"method",
+								"frappe.custom.doctype.whatsapp_order.api.get_orders_by_phone"
+							]
+						},
+						"description": "Get all orders for a specific phone number"
+					}
+				},
+				{
+					"name": "Get Orders by Location (Wildcard)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"location\": \"Nairobi*\",\n  \"limit\": 10,\n  \"offset\": 0\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/method/frappe.custom.doctype.whatsapp_order.api.get_orders_by_location",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"method",
+								"frappe.custom.doctype.whatsapp_order.api.get_orders_by_location"
+							]
+						},
+						"description": "Get orders by delivery location (supports wildcards like Nairobi*, *Street*)"
+					}
+				},
+				{
+					"name": "Get Orders by Margin (Amount Range)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"min_amount\": 1000,\n  \"max_amount\": 3000,\n  \"limit\": 10,\n  \"offset\": 0\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/method/frappe.custom.doctype.whatsapp_order.api.get_orders_by_margin",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"method",
+								"frappe.custom.doctype.whatsapp_order.api.get_orders_by_margin"
+							]
+						},
+						"description": "Get orders filtered by amount range (margin) - min_amount and max_amount are optional"
+					}
+				}
+			]
+		},
+		{
+			"name": "Order Items",
+			"item": [
+				{
+					"name": "Add Item to Order",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"order_id\": \"WOR-2025-00021\",\n  \"item_name\": \"LPG Accessory\",\n  \"quantity\": 1,\n  \"unit_price\": 500,\n  \"description\": \"LPG Regulator\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/method/frappe.custom.doctype.whatsapp_order.api.add_item_to_order",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"method",
+								"frappe.custom.doctype.whatsapp_order.api.add_item_to_order"
+							]
+						},
+						"description": "Add item to existing order"
+					}
+				},
+				{
+					"name": "Remove Item from Order",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"order_id\": \"WOR-2025-00021\",\n  \"item_index\": 0\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/method/frappe.custom.doctype.whatsapp_order.api.remove_item_from_order",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"method",
+								"frappe.custom.doctype.whatsapp_order.api.remove_item_from_order"
+							]
+						},
+						"description": "Remove item from order by index"
+					}
+				}
+			]
+		},
+		{
+			"name": "Analytics",
+			"item": [
+				{
+					"name": "Get Order Statistics",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/method/frappe.custom.doctype.whatsapp_order.api.get_order_statistics",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"method",
+								"frappe.custom.doctype.whatsapp_order.api.get_order_statistics"
+							]
+						},
+						"description": "Get order statistics and analytics"
+					}
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "http://localhost:8001",
+			"type": "string"
+		}
+	]
+}
+
+

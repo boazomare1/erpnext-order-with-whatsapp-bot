@@ -195,3 +195,14 @@ setup_whatsapp() {
 
 # Run the setup
 setup_whatsapp
+
+
+
+
+
+
+
+
+
+
+

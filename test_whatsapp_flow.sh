@@ -129,3 +129,14 @@ simulate_whatsapp_flow() {
 
 # Main execution
 simulate_whatsapp_flow
+
+
+
+
+
+
+
+
+
+
+
